@@ -158,7 +158,7 @@ Since the source code has been leaked we can play around with it: write our own 
 2024-12-12 21:45:20.460 banshee[1619:31298] Data posted successfully
 2024-12-12 21:45:20.462 banshee[1619:30946] Path does not exist: /Users/user/tempFolder-32555443
 ```
-</details>
+</details><br>
 
 But these were terminal logs, what about auditd logs? Since we know the time the stealer was run, we can see the logs using the following command:
 ```
@@ -249,12 +249,41 @@ To decrypt intercepted data, we can use [this](files/decryptor.py) python-script
 ```
 
 # Splunk Logs
-TBD
+We can check which source generates more logs `index=* | stats count by source | sort -count`
+<details>
+<summary>sources stats</summary>
+
+```
+/var/log/com.apple.xpc.launchd/launchd.log	62396
+/var/log/install.log	1138
+/Library/Logs/DiagnosticReports/shutdown_stall_2024-12-13-003247_users-Virtual-Machine.shutdownStall	595
+/var/log/asl/Logs/aslmanager.20241212T204313+01	266
+/var/log/asl/Logs/aslmanager.20241213T000519+01	263
+/var/log/asl/Logs/aslmanager.20241213T003227+01	260
+/private/var/db/diagnostics/logdata.statistics.0.txt	121
+/var/log/system.log	87
+/private/var/db/diagnostics/logdata.statistics.0.jsonl	51
+/var/log/fsck_apfs.log	26
+/private/var/db/diagnostics/logd.0.log	15
+/var/log/fsck_apfs_error.log	14
+/Users/user/Library/Logs/DiagnosticReports/banshee_orig-2024-12-12-210846.ips	3
+/Users/user/Library/Logs/DiagnosticReports/banshee_orig-2024-12-12-211124.ips	3
+/Users/user/Library/Logs/DiagnosticReports/banshee_orig-2024-12-12-211155.ips	3
+/private/var/db/diagnostics/shutdown.log	2
+/var/log/shutdown_monitor.log	2
+/private/var/db/diagnostics/logd_helper.0.log	1
+/var/log/daily.out	1
+/var/log/wifi.log	1
+```
+</details><br>
+But overall the logs are useless as they only contain 25 events for a specific time range from "2024-12-12 21:45:11" to "2024-12-12 21:45:21" and nothing related to our infostealer.
 
 # References
 1. [Beyond the wail: deconstructing the BANSHEE infostealer](https://www.elastic.co/security-labs/beyond-the-wail)
 2. [Malware & ThreatsSource Code of $3,000-a-Month macOS Malware ‘Banshee Stealer’ Leaked](https://www.securityweek.com/source-code-of-3000-a-month-macos-malware-banshee-stealer-leaked/)
 3. [Jamf. Unified Logging](https://learn.jamf.com/en-US/bundle/jamf-protect-documentation/page/Unified_Logging.html)
 4. [Kandji. Mac Logging and the log Command: A Guide for Apple Admins](https://www.kandji.io/blog/mac-logging-and-the-log-command-a-guide-for-apple-admins)
-4. [Aftermath. macOS IR Framework](https://github.com/jamf/aftermath)
-5. [Google santa. A binary authorization and monitoring system for macOS](https://github.com/google/santa)
+5. [Aftermath. macOS IR Framework](https://github.com/jamf/aftermath)
+6. [Google santa. A binary authorization and monitoring system for macOS](https://github.com/google/santa)
+7. [A deep dive into macOS TCC.db](https://www.rainforestqa.com/blog/macos-tcc-db-deep-dive)
+8. [Original Apple Script from source code](files/tempAppleScript.scpt)
