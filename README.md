@@ -287,3 +287,4 @@ But overall the logs are useless as they only contain 25 events for a specific t
 6. [Google santa. A binary authorization and monitoring system for macOS](https://github.com/google/santa)
 7. [A deep dive into macOS TCC.db](https://www.rainforestqa.com/blog/macos-tcc-db-deep-dive)
 8. [Original Apple Script from source code](files/tempAppleScript.scpt)
+9. [SentinelOne. macOS Threat Hunting & Incident Response](https://www.sentinelone.com/resources/ebook-macos-threat-hunting-incident-response/)
